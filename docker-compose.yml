@@ -1,20 +1,6 @@
 version: '3'
 
 services:
-  client:
-    build:
-      context: "."
-      dockerfile: "./docker/client/Dockerfile"
-    container_name: client
-    volumes:
-      - ./client:/app
-      - exclude:/app/node_modules/
-    ports:
-      - "3000:3000"
-    depends_on:
-      - php-fpm
-    networks:
-      - public_net
   nginx:
     image: nginx:latest
     ports:
@@ -64,7 +50,6 @@ services:
       - public_net
 
 volumes:
-  exclude:
   data-db:
 networks:
     public_net:
