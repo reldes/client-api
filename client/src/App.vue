@@ -1,11 +1,7 @@
 <template>
-  <v-app>
-    <v-main>
-      <HelloWorld />
-    </v-main>
-  </v-app>
+  <RouterView></RouterView>
 </template>
 
 <script setup lang="ts">
-  //
+import { RouterView } from 'vue-router';
 </script>

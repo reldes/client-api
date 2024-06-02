@@ -11,4 +11,4 @@ COPY client/ .
 EXPOSE 3000
 
 # Start the development server (replace with your command)
-CMD [ "npm", "run", "dev", "--", "--host"]
+CMD [ "npm", "run", "dev"]
