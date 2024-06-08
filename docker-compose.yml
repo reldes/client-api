@@ -38,7 +38,7 @@ services:
         - SYS_NICE
     restart: always
     ports:
-      - '3306:3306'
+      - '3336:3306'
     environment:
       MYSQL_DATABASE: 'db'
       MYSQL_USER: 'user'
