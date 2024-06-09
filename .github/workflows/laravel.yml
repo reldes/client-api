@@ -38,18 +38,17 @@ jobs:
         run:
           working-directory: backend
       steps:
-          -   name: Checkout Repository
+          - name: Checkout Repository
               uses: actions/checkout@master
-          -   name: Setup Enviroment
+          - name: Setup Enviroment
               uses: shivammathur/setup-php@v2
               with:
-                  php-version: '8.3'
-          -   name: Install Packages
-              run: composer install --no-dev
+                php-version: '8.3'
+          - name: Install Packages
+            run: composer install --no-dev
           - name: Init env
-            run: |
-            php artisan env:decrypt --env=production --key="${{ secrets.ENV_KEY }}"
-          -   name: Deploy to Server
+            run: php artisan env:decrypt --env=production --key="${{ secrets.ENV_KEY }}"
+          - name: Deploy to Server
               uses: ngocquyhoang/deploy@laravel
               with:
                   user: ubuntu
@@ -59,4 +58,3 @@ jobs:
                   owner: ubuntu
               env:
                   DEPLOY_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-        
