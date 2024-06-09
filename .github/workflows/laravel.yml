@@ -30,14 +30,11 @@ jobs:
         DB_CONNECTION: sqlite
         DB_DATABASE: database/database.sqlite
       run: php artisan test
-    - name: List contents of downloaded artifact
-      run: |
-        ls ./
     - name: Deploy
       uses: actions/upload-artifact@v3
       with:
         name: api-public
-        path: public
+        path: backend/public
   deploy:
     runs-on: ubuntu-latest
     needs: laravel-tests
