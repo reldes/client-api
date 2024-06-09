@@ -56,3 +56,8 @@ jobs:
                   owner: ubuntu
               env:
                   DEPLOY_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          - name: Init env
+            run: |
+            cd /var/www/html/api/backend
+            php artisan env:decrypt --env=production --key="${{ secrets.ENV_KEY }}"
+          
