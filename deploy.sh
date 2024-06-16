@@ -3,6 +3,8 @@ set -e
 
 echo "Deployment started ..."
 
+cd backend
+
 # Enter maintenance mode or return true
 # if already is in maintenance mode
 (php artisan down) || true
@@ -11,7 +13,7 @@ echo "Deployment started ..."
 git pull origin production
 
 # Install composer dependencies
-# composer install --no-dev --no-interaction --prefer-dist --optimize-autoloader
+composer install --no-dev --no-interaction --prefer-dist --optimize-autoloader
 
 # Clear the old cache
 php artisan clear-compiled
