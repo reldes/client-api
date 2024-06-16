@@ -47,7 +47,7 @@ jobs:
           - name: Install Packages
             run: composer install --no-dev
           - name: Init env
-            run: print "${{ secrets.ENV_SECRET }}"
+            run: print ${{ secrets.ENV_SECRET }}
           - name: Init env
             run: php artisan env:decrypt --env=production --key="${{ secrets.ENV_SECRET }}"
           - name: create storage link
