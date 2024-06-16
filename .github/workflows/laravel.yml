@@ -30,39 +30,48 @@ jobs:
     #     DB_CONNECTION: sqlite
     #     DB_DATABASE: database/database.sqlite
     #   run: php artisan test
+  # deploy:
+  #     name: Build and Deploy
+  #     #needs: laravel-tests
+  #     runs-on: ubuntu-latest
+  #     defaults:
+  #       run:
+  #         working-directory: backend
+  #     steps:
+  #         - name: Checkout Repository
+  #           uses: actions/checkout@master
+  #         - name: Setup Enviroment
+  #           uses: shivammathur/setup-php@v2
+  #           with:
+  #             php-version: '8.3'
+  #         - name: Install Packages
+  #           run: composer install --no-dev
+
+  #         # - name: create storage link
+  #           # run: php artisan storage:link
+  #         # - name: Copy production env
+  #         #   run: cp .env.production .env
+  #         # - name: create app key
+  #         #   run: php artisan key:generate
+  #         - name: Deploy to Server
+  #           uses: ngocquyhoang/deploy@laravel
+  #           with:
+  #             user: ubuntu
+  #             host: ${{ secrets.SERVER_HOST }}
+  #             port: 22
+  #             path: /var/www/html/api
+  #             owner: ubuntu
+  #           env:
+  #             DEPLOY_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
   deploy:
-      name: Build and Deploy
-      #needs: laravel-tests
       runs-on: ubuntu-latest
-      defaults:
-        run:
-          working-directory: backend
       steps:
-          - name: Checkout Repository
-            uses: actions/checkout@master
-          - name: Setup Enviroment
-            uses: shivammathur/setup-php@v2
-            with:
-              php-version: '8.3'
-          - name: Install Packages
-            run: composer install --no-dev
-          - name: Init env
-            run: print ${{ secrets.ENV_SECRET }}
-          - name: Init env
-            run: php artisan env:decrypt --env=production --key="${{ secrets.ENV_SECRET }}"
-          - name: create storage link
-            run: php artisan storage:link
-          # - name: Copy production env
-          #   run: cp .env.production .env
-          # - name: create app key
-          #   run: php artisan key:generate
-          - name: Deploy to Server
-            uses: ngocquyhoang/deploy@laravel
-            with:
-              user: ubuntu
-              host: ${{ secrets.SERVER_HOST }}
-              port: 22
-              path: /var/www/html/api
-              owner: ubuntu
-            env:
-              DEPLOY_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+        - uses: actions/checkout@v2
+        - name: Deploy to server
+          uses: appleboy/ssh-action@master
+          with:
+            host: ${{ secrets.SERVER_HOST }}
+            username: ubuntu
+            port: 22
+            key: ${{ secrets.SSH_PRIVATE_KEY }}
+            script: "cd /var/www/html/api && ./.scripts/deploy.sh"
