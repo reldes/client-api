@@ -76,6 +76,6 @@ jobs:
             key: ${{ secrets.SSH_PRIVATE_KEY }}
             script: |
             cd /var/www/html/api && 
-            composer install --no-dev --no-interaction --prefer-dist --optimize-autoloader &&
+            composer install --no-dev --no-interaction --prefer-dist --optimize-autoloader -d ./backend &&
             php artisan env:decrypt --env=production --key="${{ secrets.ENV_SECRET }}" &&
             ./deploy.sh
