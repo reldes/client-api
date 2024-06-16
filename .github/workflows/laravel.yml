@@ -75,6 +75,5 @@ jobs:
             port: 22
             key: ${{ secrets.SSH_PRIVATE_KEY }}
             script: |
-              cd /var/www/html/api/backend && 
-              composer install --no-dev --no-interaction --prefer-dist --optimize-autoloader &&
+              cd /var/www/html/api && 
               ./../deploy.sh
