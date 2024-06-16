@@ -77,5 +77,4 @@ jobs:
             script: |
               cd /var/www/html/api/backend && 
               composer install --no-dev --no-interaction --prefer-dist --optimize-autoloader &&
-              php artisan env:decrypt --env=production --key="${{ secrets.ENV_SECRET }}" &&
               ./../deploy.sh
