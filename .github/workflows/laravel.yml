@@ -50,10 +50,10 @@ jobs:
             run: php artisan env:decrypt --env=production --key="${{ secrets.ENV_SECRET }}"
           - name: create storage link
             run: php artisan storage:link
-          - name: Copy production env
-            run: cp .env.production .env
-          - name: create app key
-            run: php artisan key:generate
+          # - name: Copy production env
+          #   run: cp .env.production .env
+          # - name: create app key
+          #   run: php artisan key:generate
           - name: Deploy to Server
             uses: ngocquyhoang/deploy@laravel
             with:
