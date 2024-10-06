@@ -12,8 +12,8 @@ RUN curl -sS https://getcomposer.org/installer | php
 RUN mv composer.phar /usr/local/bin/composer
 
 # # Xdebug install
-# RUN pecl install xdebug \
-#     && docker-php-ext-enable xdebug
+RUN pecl install xdebug \
+    && docker-php-ext-enable xdebug
 
 ARG uname
 ARG gid
@@ -23,6 +23,7 @@ ARG uid
 RUN groupadd --gid $gid $uname
 RUN useradd -G www-data,root -s /bin/bash --uid $uid --gid $gid $uname
 
+RUN touch /var/log/xdebug.log && chown $uname:$uname /var/log/xdebug.log
 RUN mkdir /home/$uname
 RUN chown $uname:$uname /home/$uname
 RUN chmod 755 /home/dev

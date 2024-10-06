@@ -31,6 +31,9 @@ services:
     restart: 'on-failure'
     networks:
       - public_net
+    environment:
+        XDEBUG_MODE: debug
+        XDEBUG_CONFIG: client_host=host.docker.internal client_port=9003
   db:
     container_name: db
     image: mysql:8.0
