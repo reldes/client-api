@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\ExperimentController;
+use App\Http\Controllers\TemplateController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,12 +20,15 @@ Route::prefix('auth')->group(function() {
   Route::post('register',[AuthController::class,'register']);
   Route::post('login',[AuthController::class,'login']);
   
-  Route::middleware('auth:sanctum')->group(function() {
+  Route::middleware(['auth:sanctum'])->group(function() {
     Route::get('me', [AuthController::class, 'me']);
     Route::post('logout',[AuthController::class,'logout']);
   });
 });
 
-Route::middleware('auth:sanctum')->group(function() {
+// Route::middleware(['auth:sanctum'])->group(function() {
   Route::apiResource('experiments', ExperimentController::class);
-});
+  Route::apiResource('templates', TemplateController::class);
+  Route::post('templates/{id}', [TemplateController::class, 'update']);
+  Route::post('experiments/build', [ExperimentController::class, 'build']);
+// });
