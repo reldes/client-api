@@ -49,7 +49,7 @@ class ExperimentController extends Controller
         $scriptPath = base_path('build.sh');
         Storage::put('sketch/sketch.ino', $code);
         //TODO MOVE IT TO DOCKEFILE
-        exec("/usr/local/bin/arduino-cli core install arduino:avr");
+        // exec("/usr/local/bin/arduino-cli core install arduino:avr");
         exec("bash $scriptPath 2>&1", $output, $returnCode);
 
         // Save the content to the file
