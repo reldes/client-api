@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Define paths
-SKETCH_DIR="/var/www/html/storage/app/sketch"
+SKETCH_DIR="$(dirname "$0")/storage/app/sketch"
 BUILD_DIR="$SKETCH_DIR/build"
 
 # Ensure the build directory exists and is empty
