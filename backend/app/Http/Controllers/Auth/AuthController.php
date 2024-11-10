@@ -13,13 +13,13 @@ class AuthController extends Controller
     public function login(LoginRequest $request)
     {
         $loginUserData = $request->validated();
-        $user = User::where('email',$loginUserData['email'])->first();
-        if(!$user || !Hash::check($loginUserData['password'],$user->password)){
+        $user = User::where('email', $loginUserData['email'])->first();
+        if (!$user || !Hash::check($loginUserData['password'], $user->password)) {
             return response()->json([
                 'message' => 'Invalid Credentials'
-            ],401);
+            ], 401);
         }
-        $token = $user->createToken($user->name.'-AuthToken')->plainTextToken;
+        $token = $user->createToken($user->name . '-AuthToken')->plainTextToken;
         return response()->json([
             'access_token' => $token,
         ]);
@@ -39,12 +39,12 @@ class AuthController extends Controller
         ]);
     }
 
-    public function logout() 
+    public function logout()
     {
         auth()->user()->tokens()->delete();
 
         return response()->json([
-          "message"=>"logged out"
+            "message" => "logged out"
         ]);
     }
 
