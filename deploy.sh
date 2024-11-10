@@ -23,7 +23,6 @@ php artisan optimize
 
 # # Compile npm assets
 # npm run prod
-
 # Run database migrations
 # php artisan migrate
 
