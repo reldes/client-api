@@ -16,7 +16,7 @@ services:
     networks:
       - public_net
   php-fpm:
-    container_name: laravel-api
+    container_name: openlab-api
     build:
       args:
         uname: dev
@@ -35,7 +35,7 @@ services:
         XDEBUG_MODE: debug
         XDEBUG_CONFIG: client_host=host.docker.internal client_port=9003
   db:
-    container_name: db
+    container_name: openlab-db
     image: mysql:8.0
     cap_add:
         - SYS_NICE
